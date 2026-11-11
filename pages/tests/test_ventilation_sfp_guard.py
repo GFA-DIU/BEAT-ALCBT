@@ -56,7 +56,7 @@ def test_the_template_names_the_unit():
 
     checked = 0
     for name in wb.sheetnames:
-        if not name.startswith("Ventillation"):
+        if not name.startswith("Ventilation"):
             continue
         headers = [str(c.value or "").replace("\n", " ").strip()
                    for c in wb[name][1]]

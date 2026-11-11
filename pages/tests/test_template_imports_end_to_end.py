@@ -151,7 +151,7 @@ def test_the_split_ac_example_imports(client, user, building):
 
 
 def test_the_cassette_example_imports(client, user, building):
-    rows = _ventilation("Ventillation System - CeilingWa")
+    rows = _ventilation("Ventilation - Cassette AC")
     assert rows, "the example ships a filled ceiling/wall fan row"
     client.force_login(user)
     _check(_post(client, "import_ventilation_systems", {
@@ -161,7 +161,7 @@ def test_the_cassette_example_imports(client, user, building):
 
 
 def test_the_led_example_imports(client, user, building, space_types):
-    rows = _simple("Lightning System - LED")
+    rows = _simple("Lighting System - LED")
     assert rows, "the example ships filled LED rows"
     client.force_login(user)
     _check(_post(client, "import_lighting_systems", {

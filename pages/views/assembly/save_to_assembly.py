@@ -8,7 +8,10 @@ from pages.forms.assembly_form import AssemblyForm
 from pages.forms.boq_assembly_form import BOQAssemblyForm
 from pages.models.assembly import Assembly, AssemblyCategoryTechnique, StructuralProduct
 from pages.models.building import Building, BuildingAssembly, BuildingAssemblySimulated
-from pages.models.epd import EPD, EPDImpact
+from django.contrib import messages
+
+from pages.models.epd import EPD, EPDImpact, Unit
+from pages.views.assembly.share_plausibility import check_material_shares
 
 logger = logging.getLogger(__name__)
 
@@ -64,6 +67,8 @@ def save_assembly(
                     classification=classification,
                 )
 
+            _warn_on_implausible_shares(request, assembly, selected_epds)
+
             BuildingAssemblyModel.objects.update_or_create(
                 building=building_instance,
                 assembly=assembly,
@@ -90,6 +95,39 @@ def save_assembly(
             building_instance.pk,
         )
         raise HttpResponseServerError()
+
+
+def _warn_on_implausible_shares(request, assembly, selected_epds) -> None:
+    """Surface share warnings in the UI without blocking the save.
+
+    A share that cannot be right is still a share the user may have meant, so
+    this never refuses. It says what looks wrong and leaves the decision with
+    the person who typed it. See share_plausibility for why the sum check on
+    its own was not enough.
+
+    Wrapped because it runs on the save path: a warning that raises would
+    lose the assembly, which is far worse than no warning at all.
+    """
+    try:
+        names = dict(
+            EPD.objects.filter(
+                id__in=[v.get("epd_id") for v in selected_epds.values()]
+            ).values_list("id", "name")
+        )
+        materials = [
+            (names.get(int(v["epd_id"]), ""), v["quantity"],
+             v["unit"] == Unit.PERCENT)
+            for v in selected_epds.values()
+        ]
+        # TON is the mass dimension expressed in tonnes and takes the same
+        # share-of-mass input, so it reads as mass here.
+        label = {"volume": "volume", "mass": "mass", "ton": "mass"}.get(
+            assembly.dimension, "")
+        for warning in check_material_shares(materials, label):
+            messages.warning(request, warning)
+    except Exception:
+        logger.exception(
+            "Share plausibility check failed for assembly %s", assembly.pk)
 
 
 def parse_selected_epds(request) -> tuple[dict, dict[str, EPD]]:
