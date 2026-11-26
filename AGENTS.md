@@ -163,8 +163,8 @@ Not `# convert the efficiency`.
 | | |
 |---|---|
 | Branch | work on `rohit-qa`; **never merge to `main` unless asked** |
-| `main` | this **is** production — beat-alcbt.gggi.org. Until 26.11.2026 production was the `qa` branch; `qa` was folded into `main` and deleted (see below) |
-| Deploying | **merging to `main` does NOT deploy.** A deploy is `git fetch origin` **then** `git push heroku origin/main:refs/heads/main` — see below |
+| `main` | this **is** production (beat-alcbt.gggi.org). Until 26.11.2026 production was the `qa` branch; `qa` was folded into `main` and deleted (see below) |
+| Deploying | **merging to `main` does NOT deploy.** A deploy is `git fetch origin` **then** `git push heroku origin/main:refs/heads/main`. See below |
 | Production DB | read-only unless explicitly directed |
 | Secrets | never print, paste or commit a value, **not even a masked prefix**; name the setting instead. The repo is public. Rules and rotation steps: [`docs/SECRETS.md`](docs/SECRETS.md) |
 | Python | `.venv/Scripts/python.exe` |
