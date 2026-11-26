@@ -81,7 +81,7 @@ this Docker database.
 
 Next, start the Django application
 
-**Note:** Create a `.env` file in the root directory with the following environment variables:
+**Note:** Create a `.env` file in the root directory with the following environment variables. `.env` is git-ignored; never commit it (see [docs/SECRETS.md](docs/SECRETS.md)):
 
 ```bash
 # Site Configuration (for email confirmation links)
@@ -242,6 +242,10 @@ Database migrations run automatically during the deploy (`release` line in the
 
 Please **do not** report security problems in a public issue. See
 [SECURITY.md](SECURITY.md) for how to report them privately.
+
+This repository is public, so **secret values (keys, passwords, connection
+strings) must never be committed**. [docs/SECRETS.md](docs/SECRETS.md) lists
+every secret setting by name, where it is kept and how to rotate it.
 
 ## Support
 

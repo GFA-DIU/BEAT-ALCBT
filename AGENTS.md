@@ -166,7 +166,7 @@ Not `# convert the efficiency`.
 | `main` | this **is** production — beat-alcbt.gggi.org. Until 26.11.2026 production was the `qa` branch; `qa` was folded into `main` and deleted (see below) |
 | Deploying | **merging to `main` does NOT deploy.** A deploy is `git fetch origin` **then** `git push heroku origin/main:refs/heads/main` — see below |
 | Production DB | read-only unless explicitly directed |
-| Secrets | never print, paste or commit; mask connection strings |
+| Secrets | never print, paste or commit a value, **not even a masked prefix**; name the setting instead. The repo is public. Rules and rotation steps: [`docs/SECRETS.md`](docs/SECRETS.md) |
 | Python | `.venv/Scripts/python.exe` |
 | Database | local Postgres in Docker, container `heat-alcbt-db-1` |
 | Templates | `/templates`, not `pages/templates` |

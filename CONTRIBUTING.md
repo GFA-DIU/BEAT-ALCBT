@@ -58,6 +58,12 @@ mistake that caused it. The short form:
 6. **A test must be able to fail.** Check that your new test fails without
    your fix.
 
+## Secrets
+
+The repository is public. Never commit a key, password, token or connection
+string, not even in a test or a comment. Use environment variables; see
+[docs/SECRETS.md](docs/SECRETS.md).
+
 ## Code style
 
 - Python: follow the existing style; keep functions small and named for what

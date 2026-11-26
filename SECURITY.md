@@ -36,6 +36,12 @@ Please **do not** run automated scanners or load tests against the live tool,
 access other users' data, or send spam. Test against your own local copy
 instead (see the README).
 
+## Exposed secrets
+
+If you find a key, password or token in this repository or its history,
+report it privately as above and do not quote it anywhere. Maintainers rotate
+it following [docs/SECRETS.md](docs/SECRETS.md).
+
 ## Supported versions
 
 Only the current `main` branch is supported. There are no older releases.
