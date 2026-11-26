@@ -1,15 +1,16 @@
-# BEAT — Building Life Cycle Assessment Tool
+# BEAT: Building Life Cycle Assessment Tool
 
-BEAT is a free web tool for calculating the **whole-life carbon footprint of
-buildings**: the carbon in the materials a building is made of (embodied
+BEAT is a free web tool that calculates the whole-life carbon footprint of
+buildings: the carbon in the materials a building is made of (embodied
 carbon) and the carbon from the energy it uses (operational carbon).
 
-**Live tool:** <https://beat-alcbt.gggi.org> · **Licence:** [Apache 2.0](LICENSE)
+- Live tool: <https://beat-alcbt.gggi.org>
+- Licence: [Apache 2.0](LICENSE)
 
-It is built for the **ALCBT** project run by GGGI in five countries:
-**Cambodia, India, Indonesia, Thailand and Viet Nam**. Users there enter a
-building — its materials and quantities, and its energy systems — and BEAT
-reports the carbon with country-specific data.
+It was built for GGGI's ALCBT project, which works in five countries:
+Cambodia, India, Indonesia, Thailand and Viet Nam. Users enter a
+building's materials, quantities and energy systems, and BEAT reports its
+carbon using data for that country.
 
 ## What BEAT calculates
 
@@ -30,7 +31,7 @@ and C1–C4 end of life) are listed in the methodology documents.
 - **EPD library** with several thousand EPDs from international programme
   registries (EPD International, Ökobaudat, ECO Platform and others) plus
   national and generic datasets for the ALCBT countries
-- **Building editor** by component (walls, floors, roofs, foundations …) with
+- **Building editor** by component (walls, floors, roofs, foundations and so on) with
   a material picker, or **Excel/BoQ import** for many buildings at once
 - **Operational systems**: air conditioners, chillers, ventilation, lighting,
   on-site renewables and refrigerant leakage
@@ -40,7 +41,7 @@ and C1–C4 end of life) are listed in the methodology documents.
 
 ## Documentation
 
-**Methodology — for users, reviewers and researchers**
+**Methodology (for users, reviewers and researchers)**
 
 | Document | What it explains |
 |---|---|
@@ -54,7 +55,7 @@ and C1–C4 end of life) are listed in the methodology documents.
 | [Component taxonomy](docs/taxonomy_mapping.md) | How building components and techniques are classified |
 | [BIM integration](docs/bim_beat_integration_methodology.md) | Importing quantities from IFC models (planned) |
 
-**For maintainers** — the rest of [`docs/`](docs) (handovers, deploy runbooks,
+**For maintainers:** the rest of [`docs/`](docs) (handovers, deploy runbooks,
 review notes and working spreadsheets), [AGENTS.md](AGENTS.md) (rules for
 anyone changing the code) and
 [FRONTEND_SYSTEMS_INTEGRATION.md](FRONTEND_SYSTEMS_INTEGRATION.md). These are
@@ -74,8 +75,8 @@ You need **Python 3.11**, **Docker** (for the PostgreSQL database) and
 docker compose up db
 ```
 
-The Django settings detect whether they run in production; locally they use
-this Docker database.
+When BEAT runs on your own machine, it uses this Docker database
+automatically.
 
 ### 2. Install and run
 
@@ -202,8 +203,8 @@ docker exec -it "$DB_CID" psql -U postgres -d postgres -c 'select now();'
 
 ## Contributing
 
-Contributions are welcome — bug reports, translations, data corrections and
-code. Please read **[CONTRIBUTING.md](CONTRIBUTING.md)** first. It explains the
+Contributions are welcome, whether bug reports, translations, data corrections
+or code. Please read **[CONTRIBUTING.md](CONTRIBUTING.md)** first. It explains the
 branches, how to run the tests and what a pull request needs.
 
 Because BEAT's numbers go into reports and decisions, changes that touch a

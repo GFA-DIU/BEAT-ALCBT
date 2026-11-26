@@ -10,9 +10,9 @@ before it is misused.
 
 Use one of these instead:
 
-1. **GitHub private reporting** — on the repository's **Security** tab, choose
+1. **GitHub private reporting:** on the repository's **Security** tab, choose
    **Report a vulnerability** (if the button is available).
-2. **Email** — <kontakt@heat-international.de> with the subject
+2. **Email:** write to <kontakt@heat-international.de> with the subject
    "BEAT security".
 
 Please include:

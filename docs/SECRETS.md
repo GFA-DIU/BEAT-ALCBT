@@ -1,16 +1,16 @@
 # Secrets in BEAT
 
-This repository is **public**. Anything committed to it, including in an old
-commit later "removed", can be read and copied by anyone, permanently.
+This repository is public. Anything committed to it can be read and copied by
+anyone, and that stays true after it is deleted, because old commits keep it.
 
-This page lists every secret setting BEAT uses **by name only**, where it is
-kept, and how to change it safely. It never contains a value, and nor should
-anything else in this repository.
+This page lists every secret setting BEAT uses, by name only: what it
+protects, where it is kept and how to change it safely. It contains no values,
+and nothing else in this repository should either.
 
 ## The rules
 
-1. **Never commit a secret value** — not in code, config files, docs,
-   notebooks, test fixtures, commit messages or pull request text.
+1. **Never commit a secret value.** This covers code, config files, docs,
+   notebooks, test fixtures, commit messages and pull request text.
 2. **Never print, paste or screenshot a value**, not even part of one
    (a "masked" prefix still identifies the key). Refer to a secret by its
    setting name, e.g. `FIELD_ENCRYPTION_KEY`.
@@ -20,7 +20,7 @@ anything else in this repository.
 4. **If a value is ever exposed, rotate it.** Deleting it from the code does
    not help: git history keeps it. Treat an exposed secret as known to
    everyone and replace it.
-5. **Report an exposure privately** — see [SECURITY.md](../SECURITY.md). Do not
+5. **Report an exposure privately** (see [SECURITY.md](../SECURITY.md)). Do not
    open a public issue that describes or quotes it.
 
 ## Secret settings
@@ -45,7 +45,7 @@ When you add a new secret setting, add a row here in the same pull request.
 
 ## Checking a secret without showing it
 
-To confirm a setting exists, ask for its **length**, never its value:
+To confirm a setting exists, check its length instead of reading it:
 
 ```bash
 heroku config:get NEW_RELIC_LICENSE_KEY -a beat-qa | tr -d '\n' | wc -c   # 0 = missing
@@ -73,9 +73,9 @@ restarts the app (a few seconds of downtime).
 Set a new random value as above. Everyone is logged out and old
 password-reset links stop working. Nothing is lost.
 
-### `FIELD_ENCRYPTION_KEY` — ⚠️ do not just replace it
+### `FIELD_ENCRYPTION_KEY`: do not just replace it
 
-Users' email addresses are stored **encrypted with this key**. BEAT is
+Users' email addresses are stored encrypted with this key. BEAT is
 configured with exactly one key (`EJF_ENCRYPTION_KEYS` in
 `django_project/settings.py`), so if you swap the value, **every stored email
 becomes unreadable** and nobody can log in or reset a password.

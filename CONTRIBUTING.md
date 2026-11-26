@@ -6,13 +6,13 @@ number right and traceable". This page explains how to get a change in.
 
 ## Ways to help
 
-- **Report a bug** — something breaks, or a page shows the wrong thing.
-- **Report a calculation or data problem** — a carbon figure looks wrong, an
-  EPD is mislabelled, an emission factor is out of date. These are the most
+- **Report a bug** if something breaks or a page shows the wrong thing.
+- **Report a calculation or data problem** if a carbon figure looks wrong, an
+  EPD is mislabelled or an emission factor is out of date. These are the most
   valuable reports we get. Please include the building or EPD and the figure
   you expected, with its source.
-- **Translate** — see [LOCALIZATION_GUIDE.md](LOCALIZATION_GUIDE.md).
-- **Write code or documentation** — see below.
+- **Translate** the interface. See [LOCALIZATION_GUIDE.md](LOCALIZATION_GUIDE.md).
+- **Write code or documentation**, as described below.
 
 Use the [issue templates](https://github.com/GFA-DIU/BEAT-ALCBT/issues/new/choose).
 For a security problem, **do not open an issue**: follow [SECURITY.md](SECURITY.md).
@@ -21,7 +21,7 @@ For a security problem, **do not open an issue**: follow [SECURITY.md](SECURITY.
 
 | Branch | Purpose |
 |---|---|
-| `main` | Production — what runs at beat-alcbt.gggi.org |
+| `main` | Production: what runs at beat-alcbt.gggi.org |
 | everything else | Work in progress |
 
 Open pull requests against `main`. Merging does **not** deploy; a maintainer
@@ -30,7 +30,7 @@ deploys separately (see the README).
 ## Making a change
 
 1. Fork the repository (or create a branch if you have write access).
-2. Set up BEAT locally — see [Run BEAT locally](README.md#run-beat-locally).
+2. Set up BEAT locally. See [Run BEAT locally](README.md#run-beat-locally).
 3. Make your change, with tests.
 4. Run the checks:
 
