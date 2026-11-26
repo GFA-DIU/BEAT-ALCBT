@@ -1,4 +1,8 @@
-# BEAT: Building Life Cycle Assessment Tool
+<p align="center">
+  <img src="static/images/logos/logo-transparent.png" alt="BEAT: Building Emission Assessment Tool" width="440">
+</p>
+
+# BEAT: Building Emission Assessment Tool
 
 BEAT is a free web tool that calculates the whole-life carbon footprint of
 buildings: the carbon in the materials a building is made of (embodied
@@ -7,8 +11,11 @@ carbon) and the carbon from the energy it uses (operational carbon).
 - Live tool: <https://beat-alcbt.gggi.org>
 - Licence: [Apache 2.0](LICENSE)
 
-It was built for GGGI's ALCBT project, which works in five countries:
-Cambodia, India, Indonesia, Thailand and Viet Nam. Users enter a
+BEAT was developed under the [Asia Low Carbon Buildings Transition (ALCBT)
+project](https://alcbt.gggi.org/), funded by the International Climate
+Initiative (IKI) of the German government and led by the Global Green Growth
+Institute (GGGI). ALCBT works in five countries: Cambodia, India, Indonesia,
+Thailand and Viet Nam. Users enter a
 building's materials, quantities and energy systems, and BEAT reports its
 carbon using data for that country.
 
@@ -252,6 +259,28 @@ every secret setting by name, where it is kept and how to rotate it.
 
 Questions about using the tool: <kontakt@heat-international.de>.
 Bugs and feature requests: [open an issue](https://github.com/GFA-DIU/BEAT-ALCBT/issues).
+
+## Funding and partners
+
+BEAT was developed by [HEAT International GmbH](https://www.heat-international.de)
+as part of the [Asia Low Carbon Buildings Transition (ALCBT)
+project](https://alcbt.gggi.org/).
+
+ALCBT is supported by the Government of Germany through its Federal Ministry
+for the Environment, Climate Action, Nature Conservation and Nuclear Safety
+(BMUKN) via the International Climate Initiative (IKI). The project is led by
+the Global Green Growth Institute (GGGI), in partnership with the ASEAN Centre
+for Energy (ACE), Energy Efficiency Services Limited (EESL) in India, and HEAT
+International GmbH.
+
+<p align="center">
+  <img src="static/images/logos/BMWK+IKI_transparent_Web_en.png" alt="On behalf of the Federal Ministry for the Environment, Climate Action, Nature Conservation and Nuclear Safety of the Federal Republic of Germany, and the International Climate Initiative (IKI)" width="460">
+</p>
+<p align="center">
+  <img src="static/images/logos/ALCBT_logo.png" alt="Asia Low Carbon Buildings Transition (ALCBT) project" width="260">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="static/images/logos/Heat_green.svg" alt="HEAT International GmbH" width="200">
+</p>
 
 ## Licence
 
