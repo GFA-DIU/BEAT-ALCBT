@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security problem
+    url: https://github.com/GFA-DIU/BEAT-ALCBT/blob/main/SECURITY.md
+    about: Please report security issues privately, not as an issue.
+  - name: Question about using BEAT
+    url: mailto:kontakt@heat-international.de
+    about: For help using the tool, email the BEAT team.

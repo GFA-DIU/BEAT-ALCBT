@@ -130,7 +130,7 @@ def test_it_is_filled_in():
             if values:
                 filled.add(sheet)
     for expected in ("Building Details", "Cooling System - Split air cond",
-                     "Lightning System - LED", "Operational Energy Carriers",
+                     "Lighting System - LED", "Operational Energy Carriers",
                      "Structural Components - By Comp"):
         assert expected in filled, (expected, sorted(filled))
 
@@ -164,7 +164,7 @@ def test_the_hot_water_efficiency_is_a_percentage():
 
 def test_the_fan_power_is_a_specific_fan_power():
     """75 W/CMH, read as a percentage, gave 4,322,970 kWh/yr from one row."""
-    value = float(_book()["Ventillation System - Air Handl"]
+    value = float(_book()["Ventilation System - AHU"]
                   .cell(row=2, column=2).value)
     assert 0.1 <= value <= 10
 

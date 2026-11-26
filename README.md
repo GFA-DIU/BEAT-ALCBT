@@ -1,44 +1,87 @@
-# HEAT Building Life Cycle Assessment
+# BEAT — Building Life Cycle Assessment Tool
+
+BEAT is a free web tool for calculating the **whole-life carbon footprint of
+buildings**: the carbon in the materials a building is made of (embodied
+carbon) and the carbon from the energy it uses (operational carbon).
+
+**Live tool:** <https://beat-alcbt.gggi.org> · **Licence:** [Apache 2.0](LICENSE)
+
+It is built for the **ALCBT** project run by GGGI in five countries:
+**Cambodia, India, Indonesia, Thailand and Viet Nam**. Users there enter a
+building — its materials and quantities, and its energy systems — and BEAT
+reports the carbon with country-specific data.
+
+## What BEAT calculates
+
+| Life-cycle stage (EN 15978) | What it covers | Data source |
+|---|---|---|
+| **A1–A3** Product | Carbon to make the materials | EPDs (Environmental Product Declarations) |
+| **A4** Transport | Getting materials to site | Distance × freight emission factor |
+| **A5** Construction | Site energy and construction waste | Project assumptions |
+| **B6** Operational energy | Electricity and fuels used by the building | National grid and fuel emission factors |
+
+Results are shown per building and per m² of floor area. Each figure is traced
+to its EPD or emission factor, and values BEAT has to assume are labelled as
+assumptions on screen. Stages BEAT does not model (for example B4 replacement
+and C1–C4 end of life) are listed in the methodology documents.
+
+### Main features
+
+- **EPD library** with several thousand EPDs from international programme
+  registries (EPD International, Ökobaudat, ECO Platform and others) plus
+  national and generic datasets for the ALCBT countries
+- **Building editor** by component (walls, floors, roofs, foundations …) with
+  a material picker, or **Excel/BoQ import** for many buildings at once
+- **Operational systems**: air conditioners, chillers, ventilation, lighting,
+  on-site renewables and refrigerant leakage
+- **Dashboard** per building, with carbon rating labels and benchmarks
+- Interface translation files for Hindi, Indonesian, Khmer, Thai, Vietnamese and
+  other regional languages (see [LOCALIZATION_GUIDE.md](LOCALIZATION_GUIDE.md))
+
+## Documentation
+
+**Methodology — for users, reviewers and researchers**
+
+| Document | What it explains |
+|---|---|
+| [Carbon calculation methodology](docs/carbon_calculation_methodology.md) | Standards basis, what is and is not counted. *Its module table predates A4–A5 going live; see the next row.* |
+| [A4–A5 upfront carbon](docs/a4_a5_upfront_carbon_scope.md) | Transport and construction-stage carbon |
+| [Operational carbon (B6)](docs/operational_carbon_methodology.md) | Energy use and the 50-year operational figure |
+| [Energy carriers](docs/operational_energy_carriers.md) | Electricity, fuels and what each must account for |
+| [Thailand emission factors](docs/thailand_operational_ef.md) | Thai grid and fuel factors |
+| [Carbon rating labels](docs/carbon_rating_labels.md) | How the A–G labels are assigned |
+| [Benchmark sources](docs/layer2_benchmark_sources.md) | What each country publishes for benchmarks |
+| [Component taxonomy](docs/taxonomy_mapping.md) | How building components and techniques are classified |
+| [BIM integration](docs/bim_beat_integration_methodology.md) | Importing quantities from IFC models (planned) |
+
+**For maintainers** — the rest of [`docs/`](docs) (handovers, deploy runbooks,
+review notes and working spreadsheets), [AGENTS.md](AGENTS.md) (rules for
+anyone changing the code) and
+[FRONTEND_SYSTEMS_INTEGRATION.md](FRONTEND_SYSTEMS_INTEGRATION.md). These are
+internal working notes: they record decisions and incidents and may be out of
+date. They are not user documentation.
 
 ---
 
-## Table of Contents
+## Run BEAT locally
 
-- **[Get Started](#get-started)**
+You need **Python 3.11**, **Docker** (for the PostgreSQL database) and
+**Node.js** (for the front-end build).
 
-  - [Docker Database](#docker-database)
-  - [Installation](#installation)
-  - [Load EPD Data](#load-epd-data)
-  - [PostGres](#postgres)
-
-- [Contribute](#contribute)
-  - [Deploy to Heroku](#deploy-to-heroku)
-  - [Unit Tests](#unit-tests)
-  - [Load testing](#load-testing)
-- [Support](#support)
-- [License](#license)
-
----
-
-## Get started
-
-In local development we use a dockerized postgres instance.
-
-**Note:** The Django config automatically checks if this is the production environment or not.
-
-### Docker Database
-
-Start the postgres DB
+### 1. Start the database
 
 ```Bash
 docker compose up db
 ```
 
-### Installation
+The Django settings detect whether they run in production; locally they use
+this Docker database.
+
+### 2. Install and run
 
 Next, start the Django application
 
-**Note:** Create a `.env` file in the root directory with the following environment variables:
+**Note:** Create a `.env` file in the root directory with the following environment variables. `.env` is git-ignored; never commit it (see [docs/SECRETS.md](docs/SECRETS.md)):
 
 ```bash
 # Site Configuration (for email confirmation links)
@@ -55,7 +98,7 @@ Then install and run:
 
 ```Bash
 $ python -m venv .venv
-$ source .venv/bin/activate
+$ source .venv/bin/activate        # Windows: .venv\Scriptsctivate
 
 (.venv) $ pip install -r requirements.dev.txt
 (.venv) $ python manage.py migrate
@@ -77,7 +120,7 @@ If `cities_light` is not being loaded, try:
 (.venv) $ python manage.py cities_light --force-import-all
 ```
 
-#### Load EPD Data
+#### Load EPD data
 
 To load the EPD data from Ökobaudat:
 
@@ -105,7 +148,7 @@ To load a specific set of local EPDs, name the relevant file with one of the key
 (.venv) $ python manage.py load_local_epds --file EDGE_HANDBOOK_EPDs
 ```
 
-### Loading Labels
+#### Load labels
 
 Load EPD (manual) label mappings from label file
 
@@ -113,7 +156,7 @@ Load EPD (manual) label mappings from label file
 (.venv) $ python manage.py map_GCCA_EPD_label
 ```
 
-### PostGres
+### Inspecting and restoring the database
 
 To inspect the data tables in postgres instead of Django admin
 
@@ -157,51 +200,63 @@ docker exec -it "$DB_CID" psql -U postgres -d postgres -c '\dt'    # list tables
 docker exec -it "$DB_CID" psql -U postgres -d postgres -c 'select now();'
 ```
 
-## Contribute
+## Contributing
 
-Follow the installation steps [above](#installation).
+Contributions are welcome — bug reports, translations, data corrections and
+code. Please read **[CONTRIBUTING.md](CONTRIBUTING.md)** first. It explains the
+branches, how to run the tests and what a pull request needs.
 
-### Deploy to Heroku
+Because BEAT's numbers go into reports and decisions, changes that touch a
+calculation must say where every number comes from (see [AGENTS.md](AGENTS.md)).
 
-To deploy to the production server you need to be added to the repository with the relevant roles. Once you obtain an authentication token, you can contribute like this through the Heroku CLI.
-
-```Bash
-heroku login -i
-git push heroku main
-```
-
-For executing any necessary migrations, connect via `SSH` or the Heroku-Webinterface.
-
-For executing scripts not warranting their own command, execute them as follows with `python manage.py shell`:
-
-```Python
-with open('path/to/your_script.py') as f:
-    exec(f.read())
-```
-
-### Unit Tests
-
-To execute Unit tests, run
+### Tests
 
 ```Bash
-(.venv) $ pytest
+(.venv) $ pytest -q            # the full suite takes about 10 minutes
+(.venv) $ python manage.py check
 ```
 
 ### Load testing
 
-Execute for production server with the GUI as follows:
+Run only against a server you are allowed to load-test:
 
 ```Bash
-(.venv) $ locust -f load_testing/locust/locustfile.py --host https://beat-alcbt.gggi.org
+(.venv) $ locust -f load_testing/locust/locustfile.py --host <your-server>
 ```
+
+### Deploying (maintainers only)
+
+Production is the `main` branch, hosted on Heroku. **Merging to `main` does not
+deploy.** A maintainer with Heroku access deploys with:
+
+```Bash
+git fetch origin                              # without this you deploy an old commit
+git push heroku origin/main:refs/heads/main
+```
+
+Database migrations run automatically during the deploy (`release` line in the
+`Procfile`). Check afterwards with `heroku releases -a beat-qa -n 1`. See
+[AGENTS.md §10](AGENTS.md) for the details that have gone wrong before.
+
+## Security
+
+Please **do not** report security problems in a public issue. See
+[SECURITY.md](SECURITY.md) for how to report them privately.
+
+This repository is public, so **secret values (keys, passwords, connection
+strings) must never be committed**. [docs/SECRETS.md](docs/SECRETS.md) lists
+every secret setting by name, where it is kept and how to rotate it.
 
 ## Support
 
-For support, please reach out to the maintainers or [kontakt@heat-international.de](mailto:kontakt@heat-international.de).
+Questions about using the tool: <kontakt@heat-international.de>.
+Bugs and feature requests: [open an issue](https://github.com/GFA-DIU/BEAT-ALCBT/issues).
 
-## License
+## Licence
 
-[Apache 2.0](LICENSE)
+[Apache 2.0](LICENSE). Data loaded into BEAT (EPDs, emission factors) comes
+from third-party sources with their own terms; the source of each EPD is shown
+in the tool.
 
 The tool was built with the public Django template `wsvincent/lithium`. As requested, the copyright notice is included below:
 

@@ -1,5 +1,10 @@
 # Production Deployment Runbook — rohit-qa EPD/taxonomy work
 
+> **26.11.2026: production is now the `main` branch.** `qa` was folded into
+> `main` and deleted. Wherever this file says `qa` or `origin/qa`, read `main` /
+> `origin/main`; deploy with `git fetch origin` then
+> `git push heroku origin/main:refs/heads/main`. See AGENTS.md §10.
+
 Covers every data/code change made on `rohit-qa` and how to roll it out to production
 (Heroku + Supabase) **safely and in order**. Nothing here runs automatically — each
 step is deliberate. Read §0 and §1 before starting.

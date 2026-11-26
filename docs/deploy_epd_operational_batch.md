@@ -1,5 +1,10 @@
 # Deployment runbook - EPD catalogue + operational carbon batch
 
+> **26.11.2026: production is now the `main` branch.** `qa` was folded into
+> `main` and deleted. Wherever this file says `qa` or `origin/qa`, read `main` /
+> `origin/main`; deploy with `git fetch origin` then
+> `git push heroku origin/main:refs/heads/main`. See AGENTS.md §10.
+
 > **This release was executed on 12 Oct 2026 (v170).** The commit counts and
 > migration numbers below describe that release and are now historic: `qa` has
 > been at **0060** since, and the six data commands have all been run. Do not
