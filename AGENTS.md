@@ -162,9 +162,9 @@ Not `# convert the efficiency`.
 
 | | |
 |---|---|
-| Branch | work on `rohit-qa`; **never merge to `qa` unless asked** |
-| `qa` | this **is** production — beat-alcbt.gggi.org |
-| Deploying | **merging to `qa` does NOT deploy.** A deploy is `git fetch origin` **then** `git push heroku origin/qa:refs/heads/main` — see below |
+| Branch | work on `rohit-qa`; **never merge to `main` unless asked** |
+| `main` | this **is** production — beat-alcbt.gggi.org. Until 26.11.2026 production was the `qa` branch; `qa` was folded into `main` and deleted (see below) |
+| Deploying | **merging to `main` does NOT deploy.** A deploy is `git fetch origin` **then** `git push heroku origin/main:refs/heads/main` — see below |
 | Production DB | read-only unless explicitly directed |
 | Secrets | never print, paste or commit; mask connection strings |
 | Python | `.venv/Scripts/python.exe` |
@@ -174,12 +174,12 @@ Not `# convert the efficiency`.
 
 ### The deploy silently ships the wrong commit if you skip the fetch
 
-`origin/qa` is a **remote-tracking ref**. It only moves when you run `git fetch`.
+`origin/main` is a **remote-tracking ref**. It only moves when you run `git fetch`.
 Merging a PR on GitHub does not touch your local copy of it.
 
 ```
 git fetch origin                               # ← without this you deploy the OLD commit
-git push heroku origin/qa:refs/heads/main
+git push heroku origin/main:refs/heads/main
 ```
 
 > PR #599 was merged on GitHub and then deployed without a fetch. Heroku built
@@ -193,6 +193,18 @@ Afterwards, check what actually shipped rather than trusting "Released vN":
 heroku releases -a beat-qa -n 1        # the commit it deployed
 heroku releases:output vN -a beat-qa   # the release phase (migrations)
 ```
+
+### `main` replaced `qa` on 26.11.2026
+
+The old `main` was a 2025 fork that had drifted from production: eight commits
+(assembly templates, per-building CSV export, a clear-filters button) never
+reached `qa`, and its migrations 0012–0016 clash with production's numbering.
+It was **not merged**. It is kept as the tag `archive/main-2025-11`; `main` was
+then pointed at `qa`'s commit and `qa` deleted. Fifteen other unmerged feature
+branches are kept as `archive/<branch-name>` tags. Older docs that say `qa`
+mean what is now `main`. The Heroku app is still called `beat-qa`.
+
+Recover any of them with `git checkout -b <name> archive/<name>`.
 
 ### Two local traps
 

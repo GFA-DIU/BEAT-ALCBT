@@ -1,5 +1,10 @@
 # Handover — what is in flight
 
+> **26.11.2026: production is now the `main` branch.** `qa` was folded into
+> `main` and deleted. Wherever this file says `qa` or `origin/qa`, read `main` /
+> `origin/main`; deploy with `git fetch origin` then
+> `git push heroku origin/main:refs/heads/main`. See AGENTS.md §10.
+
 Read `AGENTS.md` first: it has the rules for working here. This file is the
 *state* — what is done, what is deliberately not done, and what is waiting on a
 human decision. It changes weekly; AGENTS.md does not.

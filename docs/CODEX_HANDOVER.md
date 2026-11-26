@@ -1,5 +1,10 @@
 # Start here
 
+> **26.11.2026: production is now the `main` branch.** `qa` was folded into
+> `main` and deleted. Wherever this file says `qa` or `origin/qa`, read `main` /
+> `origin/main`; deploy with `git fetch origin` then
+> `git push heroku origin/main:refs/heads/main`. See AGENTS.md §10.
+
 You are picking up BEAT from a Claude session that ran out of credits. This
 file assumes you remember nothing. Read it top to bottom before touching
 anything; it takes about ten minutes and will save you a day.
