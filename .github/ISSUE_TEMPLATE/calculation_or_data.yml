@@ -1,0 +1,45 @@
+name: Calculation or data problem
+description: A carbon figure, EPD, emission factor or label looks wrong
+labels: [data]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        These reports matter most: BEAT's figures are used in reports and decisions. A source for the value you expect helps us fix it quickly.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What looks wrong?
+      options:
+        - A building's carbon result
+        - An EPD (value, unit, category, country or source link)
+        - An emission factor (grid, fuel, transport)
+        - A rating label or benchmark
+        - Something else
+    validations:
+      required: true
+  - type: dropdown
+    id: country
+    attributes:
+      label: Country
+      options:
+        - Cambodia
+        - India
+        - Indonesia
+        - Thailand
+        - Viet Nam
+        - Not country-specific
+  - type: textarea
+    id: what
+    attributes:
+      label: What BEAT shows
+      description: The figure or field, and where you saw it (EPD name, page, or building - do not share private building details publicly).
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected, and the source
+      description: The value you believe is right and where it comes from (EPD document, national dataset, standard).
+    validations:
+      required: true

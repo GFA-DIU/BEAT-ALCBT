@@ -1,0 +1,41 @@
+name: Bug report
+description: Something breaks, or a page does not behave as it should
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. If the problem is a **wrong carbon figure or wrong data**, please use the "Calculation or data problem" template instead.
+        **Security problems:** do not report them here. See SECURITY.md.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to ...
+        2. Click ...
+        3. See error
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Page or URL
+      placeholder: https://beat-alcbt.gggi.org/...
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
+      placeholder: e.g. Chrome 130 on Windows 11
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots or other details
+      description: Please remove any personal information before attaching.
